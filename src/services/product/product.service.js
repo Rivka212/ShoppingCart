@@ -33,16 +33,14 @@ async function query(filterBy = {}) {
 
 async function loadCartService() {
     const productsCatalog = await storageService.query(STORAGE_KEY)
-    const cartItems = storageService.loadFromStorage(CART_KEY) || []
+    const cartItems = loadFromStorage(CART_KEY) || []
 
     const cartProducts = cartItems.map(cartItem => {
-        const product = productsCatalog.find(p => p._id === cartItem._id)
+        const product = productsCatalog.find(product => product._id === cartItem._id)
         return product ? { ...product, quantity: cartItem.quantity } : null
-    }).filter(p => p !== null)
-
+    }).filter(product => product !== null)
     return cartProducts
 }
-
 
 function getById(productId) {
     return storageService.get(STORAGE_KEY, productId)

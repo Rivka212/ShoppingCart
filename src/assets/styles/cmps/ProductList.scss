@@ -51,8 +51,11 @@
             padding: 7px;
             color: rgb(104, 101, 101);
             background-color: rgb(218, 213, 213);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
 
+        .btn-add:hover {
+            background-color: rgb(185, 166, 166);
         }
     }
-
 }
