@@ -2,6 +2,8 @@ import { storageService } from '../async-storage.service.js'
 import { makeId, saveToStorage, loadFromStorage } from '../util.service.js'
 
 const STORAGE_KEY = 'productDB'
+const CART_KEY = 'cart'
+
 let products = _createProducts()
 
 export const productService = {
@@ -11,13 +13,14 @@ export const productService = {
     save,
     getEmptyProduct,
     addToCart,
+    loadCartService
 }
 
 window.cs = productService
 
 async function query(filterBy = {}) {
     var products = await storageService.query(STORAGE_KEY)
-
+   const cartItems = loadFromStorage('cart') || []
     // if (filterBy.message) {
     //     const regExp = new RegExp(filterBy.message, 'i')
     //     Products = Products.filter(Product => regExp.test(Product.message))
@@ -28,7 +31,17 @@ async function query(filterBy = {}) {
     return products
 }
 
-// loadCart
+async function loadCartService() {
+    const productsCatalog = await storageService.query(STORAGE_KEY)
+    const cartItems = storageService.loadFromStorage(CART_KEY) || []
+
+    const cartProducts = cartItems.map(cartItem => {
+        const product = productsCatalog.find(p => p._id === cartItem._id)
+        return product ? { ...product, quantity: cartItem.quantity } : null
+    }).filter(p => p !== null)
+
+    return cartProducts
+}
 
 
 function getById(productId) {
@@ -46,15 +59,20 @@ async function save(product) {
 }
 
 async function addToCart(product) {
-    console.log(product);
-    console.log('Sending product to addToCart:', product)
+    let cart = loadFromStorage(CART_KEY) || []
 
-    product.quantity = (product.quantity || 0) + 1
-    product = await storageService.put(STORAGE_KEY, product)
-    // product = storageService.put(STORAGE_KEY, product)
-    return product
+    const existingIdx = cart.findIndex(p => p._id === product._id)
 
+    if (existingIdx >= 0) {
+        cart[existingIdx].quantity += 1
+    } else {
+        cart.push({ ...product, quantity: 1 })
+    }
+
+    saveToStorage(CART_KEY, cart)
+    return cart[existingIdx] || cart[cart.length - 1]
 }
+
 
 function getEmptyProduct() {
     return {
@@ -72,66 +90,72 @@ function _createProducts() {
                 title: 'tablet',
                 price: 900,
                 img: 'tablet.jpg',
-                quantity: 1,
             },
             {
                 _id: 2,
                 title: 'lamp',
                 price: 45,
                 img: 'lamp.jpg',
-                quantity: 1,
             },
             {
                 _id: 3,
                 title: 'box-pens',
                 price: 12,
                 img: 'box-pens.jpg',
-                quantity: 1,
             },
             {
                 _id: 4,
                 title: 'flowerpot',
                 price: 50,
                 img: 'flowerpot.jpg',
-                quantity: 1,
             },
             {
                 _id: 5,
                 title: 'diary',
                 price: 23,
                 img: 'diary.jpg',
-                quantity: 0,
             },
             {
                 _id: 6,
                 title: 'calculator',
                 price: 18,
                 img: 'calculator.jpg',
-                quantity: 0,
             },
             {
                 _id: 7,
                 title: 'letter',
                 price: 5,
                 img: 'letter.jpg',
-                quantity: 0,
             },
             {
                 _id: 8,
                 title: 'pens',
                 price: 12,
                 img: 'pens.jpg',
-                quantity: 1,
             },
             {
                 _id: 9,
                 title: 'notebook',
                 price: 17,
                 img: 'notebook.jpg',
-                quantity: 1,
             },
         ]
         saveToStorage(STORAGE_KEY, products)
     }
     return products
 }
+
+
+
+
+// // cart:
+// [
+//   {
+//     "productId": "123",
+//     "quantity": 2
+//   },
+//   {
+//     "productId": "456",
+//     "quantity": 1
+//   }
+// ]

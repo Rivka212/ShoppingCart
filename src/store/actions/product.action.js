@@ -1,5 +1,5 @@
 import { productService } from '../../services/product/product.service.js'
-import { ADD_PRODUCT, REMOVE_PRODUCT, SET_CART, SET_PRODUCT, SET_PRODUCTS, UPDATE_PRODUCT } from '../reducers/product.reducer.js'
+import { ADD_PRODUCT, ADD_TO_CART, REMOVE_PRODUCT, SET_CART, SET_PRODUCT, SET_PRODUCTS, UPDATE_PRODUCT } from '../reducers/product.reducer.js'
 import { store } from '../store.js'
 
 export async function loadProducts(filterBy = {}) {
@@ -23,10 +23,12 @@ export async function loadProduct() {
     }
 }
 
-export async function loadCart(filterBy = { quantity }) {
+export async function loadCart() {
     try {
-        const products = await productService.query(filterBy)
-        store.dispatch(getCmdSetCart(products))
+        const cartProducts = await productService.loadCartService()
+
+        // const products = await productService.query(filterBy)
+        store.dispatch(getCmdSetCart(cartProducts))
         // return product
     } catch (err) {
         console.log('Cannot load cart', err)
@@ -46,13 +48,11 @@ export async function removeProduct(productId) {
 }
 
 export async function addProductToCart(product) {
-    console.log(product);
-    console.log('Sending product to addToCart:', product)
-
     try {
         const updatedProduct = await productService.addToCart(product)
         store.dispatch(getCmdAddProduct(updatedProduct))
-        store.dispatch({ type: SET_CART })
+        // store.dispatch({ type: SET_CART })
+        store.dispatch(getCmdAddToCart(updatedProduct))
         return updatedProduct
     } catch (err) {
         console.log('Cannot add product', err)
@@ -92,3 +92,11 @@ function getCmdSetCart(products) {
         products
     }
 }
+
+function getCmdAddToCart(product) {
+    return {
+        type: ADD_TO_CART,
+        product
+    }
+}
+

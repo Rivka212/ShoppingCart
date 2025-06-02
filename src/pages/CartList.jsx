@@ -12,8 +12,8 @@ export function CartList() {
     // const currentProduct = Products.length > 0 ? Products[Products.length - 1] : null;
 
     useEffect(() => {
-        loadCart(filterBy)
-    }, [filterBy])
+        loadCart()
+    }, [])
 
     return (
         <section className='my-cart'>

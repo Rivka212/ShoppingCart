@@ -28,13 +28,8 @@ export function ProductIndex() {
     }
 
     async function onAddProductToCart(product) {
-        console.log(product);
-
         try {
             const savedProduct = await addProductToCart(product)
-            // const savedProduct = await save(product)
-console.log('Sending product to addToCart:', product)
-
             console.log(`Product added (id: ${savedProduct._id})`)
         } catch (err) {
             console.log('Cannot add product')
