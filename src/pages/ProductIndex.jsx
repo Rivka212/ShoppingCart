@@ -30,23 +30,21 @@ export function ProductIndex() {
     async function onAddProductToCart(product) {
         try {
             const savedProduct = await addProductToCart(product)
-            console.log(`Product added (id: ${savedProduct._id})`)
+            // console.log(`Product added (id: ${savedProduct._id})`)
         } catch (err) {
-            console.log('Cannot add product')
+            c45896+onsole.log('Cannot add product')
         }
     }
 
 
     function onSetFilterBy(newFilter) {
-        console.log(newFilter);
-
+        // console.log(newFilter);
         setFilterBy({ ...newFilter })
     }
 
     return (
         <section className="app">
             <AppHeader />
-
             <section className="main-container">
                 <div>
                     <ProductFilter filterBy={filterBy} onFilterBy={onSetFilterBy} />

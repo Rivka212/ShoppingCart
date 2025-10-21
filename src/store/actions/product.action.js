@@ -6,7 +6,7 @@ export async function loadProducts(filterBy = {}) {
     try {
         const products = await productService.query(filterBy)
         store.dispatch(getCmdSetProducts(products))
-        // return product
+        // return products
     } catch (err) {
         console.log('Cannot load product', err)
         throw err

@@ -18,8 +18,8 @@ export function ProductFilter({ filterBy, onFilterBy }) {
     return <section className="product-filter">
         <input
             type="text"
-            name="message"
-            value={filterByToEdit.message}
+            name="title"
+            value={filterByToEdit.title || ""}
             placeholder="Filter"
             onChange={handleChange}
             required

@@ -33,8 +33,9 @@ function save(product) {
 
 function getEmptyProduct() {
     return {
-        email: '',
-        message: '',
+        title: '',
+        price:'',
+        img:'',
     }
 }
 

@@ -19,12 +19,13 @@ export const productService = {
 window.cs = productService
 
 async function query(filterBy = {}) {
+    console.log(filterBy)
     var products = await storageService.query(STORAGE_KEY)
    const cartItems = loadFromStorage('cart') || []
-    // if (filterBy.message) {
-    //     const regExp = new RegExp(filterBy.message, 'i')
-    //     Products = Products.filter(Product => regExp.test(Product.message))
-    // }
+    if (filterBy.title) {
+        const regExp = new RegExp(filterBy.title, 'i')
+        products = products.filter(product => regExp.test(product.title))
+    }
     if (filterBy.quantity) {
         products = products.filter(product => product.quantity >0)
     }
