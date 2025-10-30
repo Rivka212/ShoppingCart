@@ -29,14 +29,17 @@
         margin-inline-end: 17px;
         color: rgb(243, 233, 221);
         margin-top: 10px;
+        display: inline-block;
+        transition: transform 0.2s ease, color 0.2s ease;
     }
 
     img.cart:hover {
-        height: 21px;
+        transform: scale(1.1);
+        filter: brightness(0) saturate(100%) invert(54%) sepia(24%) saturate(525%) hue-rotate(338deg) brightness(92%) contrast(89%);
     }
 
     a:hover {
-        font-size: 18px;
+        transform: scale(1.1);
         color: rgb(170, 121, 96)
     }
 
