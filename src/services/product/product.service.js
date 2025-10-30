@@ -19,7 +19,7 @@ export const productService = {
 window.cs = productService
 
 async function query(filterBy = {}) {
-    console.log(filterBy)
+    // console.log(filterBy)
     var products = await storageService.query(STORAGE_KEY)
    const cartItems = loadFromStorage('cart') || []
     if (filterBy.title) {

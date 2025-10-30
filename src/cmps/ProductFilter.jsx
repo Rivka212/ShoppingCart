@@ -20,7 +20,7 @@ export function ProductFilter({ filterBy, onFilterBy }) {
             type="text"
             name="title"
             value={filterByToEdit.title || ""}
-            placeholder="Filter"
+            placeholder="Search..."
             onChange={handleChange}
             required
         />

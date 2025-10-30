@@ -32,7 +32,7 @@ export function ProductIndex() {
             const savedProduct = await addProductToCart(product)
             // console.log(`Product added (id: ${savedProduct._id})`)
         } catch (err) {
-            c45896+onsole.log('Cannot add product')
+            console.log('Cannot add product')
         }
     }
 
