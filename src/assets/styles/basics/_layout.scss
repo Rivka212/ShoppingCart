@@ -4,7 +4,7 @@
     // align-content: center;
     // max-width: 450px;
     margin-top: 30px;
-    margin-inline: 100px;
+    // margin-inline: 100px;
     // max-width: 1024px;
 
     // grid-template-columns:  1fr;
@@ -26,3 +26,33 @@
     // }
 
 }
+
+.main-container {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+
+    >* {
+        grid-column: 2;
+
+        &.full {
+            grid-column: 1 / -1;
+        }
+    }
+}
+
+ @include for-narrow-layout {
+       .main-container {
+            grid-template-columns: 20px 1fr 20px;
+
+        }
+    }
+
+    @include for-large-layout {
+
+       .main-container {
+           grid-template-columns: 80px 1fr 80px;
+
+        }
+    }
+
+
