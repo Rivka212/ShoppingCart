@@ -1,15 +1,23 @@
-.product-filter{
-    background-color: white;
-    margin-inline: 50px;
-    padding: 10px;
-  
+.product-filter {
+  display: flex;
+  align-content: center;
+  justify-items: center;
 
-    input{
-        height: 35px;
-        width: 300px;
-          margin-top: 10px;
-        border: 2px solid rgb(233, 227, 227);
-        margin-left:10px ;
-    }
+  
+  background-color: white;
+  // margin-inline: 100px;
+  //  width-max: 300px;
+   max-width: 500px;
+  padding: 10px;
+
+
+  input {
+    // height: 35px;
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+  }
 
 }
