@@ -5,7 +5,7 @@ export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const SET_CART = 'SET_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
-
+export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART'
 
 const initialState = {
     products: [],
@@ -41,25 +41,29 @@ export function productReducer(state = initialState, action) {
         // case ADD_TO_CART:
         //     newState = {...state, cart: [...state.cart, action.product] };
         //     break;
-case ADD_TO_CART: {
-    const existingProduct = state.cart.find(p => p._id === action.product._id)
-    let updatedCart
-    if (existingProduct) {
-        updatedCart = state.cart.map(p =>
-            p._id === action.product._id
-                ? { ...p, quantity: p.quantity + 1 }
-                : p
-        )
-    } else {
-        updatedCart = [...state.cart, { ...action.product, quantity: 1 }]
-    }
-    newState = { ...state, cart: updatedCart }
-    break;
-}
+        case ADD_TO_CART: {
+            const existingProduct = state.cart.find(p => p._id === action.product._id)
+            let updatedCart
+            if (existingProduct) {
+                updatedCart = state.cart.map(p =>
+                    p._id === action.product._id
+                        ? { ...p, quantity: p.quantity + 1 }
+                        : p
+                )
+            } else {
+                updatedCart = [...state.cart, { ...action.product, quantity: 1 }]
+            }
+            newState = { ...state, cart: updatedCart }
+            break;
+        }
 
-
-
-
+        case REMOVE_PRODUCT_FROM_CART:
+            newState = {
+                ...state,
+                cart: state.cart.filter(p => p._id !== action.productId)
+            }
+            break;
+     
 
         default:
     }

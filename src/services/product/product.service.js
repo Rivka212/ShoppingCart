@@ -13,6 +13,8 @@ export const productService = {
     save,
     getEmptyProduct,
     addToCart,
+    removeFromCart,
+    updateQuantity,
     loadCartService
 }
 
@@ -58,18 +60,41 @@ async function save(product) {
 }
 
 async function addToCart(product) {
-    let cart = loadFromStorage(CART_KEY) || []
+     let cart = await storageService.query(CART_KEY)
 
     const existingIdx = cart.findIndex(p => p._id === product._id)
 
     if (existingIdx >= 0) {
         cart[existingIdx].quantity += 1
+        await storageService.put(CART_KEY, cart[existingIdx])
+        return cart[existingIdx]
     } else {
-        cart.push({ ...product, quantity: 1 })
+        const productToAdd = { ...product, quantity: 1 }
+        await storageService.post(CART_KEY, productToAdd)
+        return productToAdd
     }
+}
 
-    saveToStorage(CART_KEY, cart)
-    return cart[existingIdx] || cart[cart.length - 1]
+export async function updateQuantity(productId, diff) {
+    let cart = await storageService.query(CART_KEY)
+
+    const idx = cart.findIndex(p => p._id === productId)
+    if (idx === -1) return cart
+
+    cart[idx].quantity += diff
+
+    if (cart[idx].quantity <= 0) {
+        await storageService.remove(CART_KEY, productId)
+    } else {
+        await storageService.put(CART_KEY, cart[idx])
+    }
+     return await storageService.query(CART_KEY)
+}
+
+
+export async function removeFromCart(productId) {
+    await storageService.remove(CART_KEY, productId)
+    return await storageService.query(CART_KEY)
 }
 
 

@@ -8,24 +8,19 @@
     }
 
     .cart-list {
-        column: 1;
+        // column: 1;
     }
 
-    img {
-        height: 100px;
-        width: 100px;
-        border-radius: 5px;
-    }
 
     button {
         border: none;
         padding: 7px;
-        border-radius: 5px;
+        border-radius: 3px;
         background-color: rgb(173, 168, 168);
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     }
 
-    button:hover{
+    button:hover {
         background-color: rgb(213, 204, 208);
     }
 
@@ -33,24 +28,45 @@
         display: flex;
         justify-content: start;
         align-content: center;
+        align-items: center;
         max-width: 500px;
         background-color: rgb(173, 168, 168);
         padding: 10px;
         margin-bottom: 10px;
         border-radius: 5px;
 
-        div {
-            margin-left: 10px;
+        .product-info {
+            display: flex;
+            align-items: center;
 
-            h4 {
-                margin: 0;
-                text-transform: capitalize;
+            img {
+                height: 100px;
+                width: 100px;
+                object-fit: cover;
+                border-radius: 5px;
             }
 
-            h4:first-of-type {
-                font-size: 20px;
-                margin-top: 15px;
+            div {
+                margin-left: 10px;
+
+                h4 {
+                    margin: 0;
+                    text-transform: capitalize;
+                }
+
+                h4:first-of-type {
+                    font-size: 20px;
+                    margin-top: 15px;
+                }
             }
+        }
+
+        .cart-controls {
+            margin-left: auto; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 55px;
         }
     }
 }

@@ -26,10 +26,7 @@ export async function loadProduct() {
 export async function loadCart() {
     try {
         const cartProducts = await productService.loadCartService()
-
-        // const products = await productService.query(filterBy)
         store.dispatch(getCmdSetCart(cartProducts))
-        // return product
     } catch (err) {
         console.log('Cannot load cart', err)
         throw err
@@ -50,12 +47,32 @@ export async function removeProduct(productId) {
 export async function addProductToCart(product) {
     try {
         const updatedProduct = await productService.addToCart(product)
-        store.dispatch(getCmdAddProduct(updatedProduct))
-        // store.dispatch({ type: SET_CART })
-        store.dispatch(getCmdAddToCart(updatedProduct))
+        store.dispatch(getCmdSetCart(updatedProduct))
+        // store.dispatch(getCmdAddToCart(updatedProduct))
         return updatedProduct
     } catch (err) {
         console.log('Cannot add product', err)
+        throw err
+    }
+}
+
+export async function removeProductFromCart(productId) {
+    try {
+        const updatedCart = await productService.removeFromCart(productId)
+        store.dispatch(getCmdSetCart(updatedCart))
+        //   store.dispatch(getCmdAddProduct(updatedCart))
+    } catch (err) {
+        console.log('Cannot remove product from cart', err)
+        throw err
+    }
+}
+
+export async function updateProductQuantity(productId, diff) {
+    try {
+        const updatedCart = await productService.updateQuantity(productId, diff)
+        store.dispatch(getCmdSetCart(updatedCart))
+    } catch (err) {
+        console.log('Cannot update quantity', err)
         throw err
     }
 }
@@ -99,4 +116,5 @@ function getCmdAddToCart(product) {
         product
     }
 }
+
 
