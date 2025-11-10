@@ -20,7 +20,7 @@ export function CartList() {
     return (
         <section className='my-cart'>
             <h1 >MY CART</h1>
-            <button onClick={() => navigate('/')}>Back to Home</button>
+            {/* <button onClick={() => navigate('/')}>Back to Home</button> */}
 
             <ul className="cart-list">
                 {cartProducts?.map(product => (

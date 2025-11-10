@@ -5,7 +5,6 @@ import { ProductList } from '../cmps/ProductList.jsx'
 import { ProductFilter } from '../cmps/ProductFilter.jsx'
 import { loadProducts, removeProduct, addProductToCart } from '../store/actions/product.action.js'
 import { productService } from '../services/product/product.service.js'
-import { AppHeader } from '../cmps/AppHeader.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 
@@ -49,7 +48,7 @@ export function ProductIndex() {
 
     return (
         <section className="app">
-            <AppHeader />
+            <img className="main-image" src={`../../imgs/office.jpg`} alt="shopping-image" />
             <section className="main-container">
                 <div>
                     <ProductFilter filterBy={filterBy} onFilterBy={onSetFilterBy} />
