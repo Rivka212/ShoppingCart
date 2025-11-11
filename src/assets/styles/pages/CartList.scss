@@ -7,21 +7,22 @@
         margin-top: 30px;
     }
 
-    .cart-list {
-        // column: 1;
-    }
-
-
     button {
         border: none;
-        padding: 7px;
+        background-color: rgb(195, 190, 190);
+        border-radius: 50px;
+    }
+
+    button.remove-btn {
+        border: none;
+        padding: 5px;
         border-radius: 3px;
-        background-color: rgb(173, 168, 168);
+        background-color: rgb(195, 190, 190);
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     }
 
     button:hover {
-        background-color: rgb(213, 204, 208);
+        background-color: rgb(240, 231, 235);
     }
 
     article {
@@ -39,7 +40,7 @@
             display: flex;
             align-items: center;
 
-            img {
+            .product-img {
                 height: 100px;
                 width: 100px;
                 object-fit: cover;
@@ -47,7 +48,7 @@
             }
 
             div {
-                margin-left: 10px;
+                margin-left: 30px;
 
                 h4 {
                     margin: 0;
@@ -62,11 +63,53 @@
         }
 
         .cart-controls {
-            margin-left: auto; 
+            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-top: 55px;
+            margin-top: 5px;
+
+            div.plus-minus {
+                display: block;
+                padding: 2px;
+                margin-top: 5px;
+                border-radius: 50px;
+                background-color: rgb(195, 190, 190);
+
+                button:hover {
+                    border-radius: 50px;
+                    transform: scale(1.05);
+                }
+
+                button {
+                    height: 20px;
+                    margin-top: 2px;
+                    transition: all 0.2s ease;
+                }
+            }
+
+            img.plus,
+            img.minus {
+                height: 13px;
+            }
+
+            span {
+                color: rgb(34, 33, 33);
+            }
+
+            .trash {
+                height: 20px;
+                width: 100%;
+                object-fit: cover;
+            }
         }
     }
 }
+
+
+// img.trash {
+//     height: 10px;
+//     width: 100%;
+//     object-fit: cover;
+//     border-radius: 4px;
+// }
