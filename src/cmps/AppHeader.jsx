@@ -13,7 +13,6 @@ export function AppHeader() {
                         <NavLink to="/cart"><img className="cart" src={`../../icons/cart.png`} alt="cart"/></NavLink>
                     </nav>
                 </section>
-                {/* <img className="main-image" src={`../../imgs/office.jpg`} alt="shopping-image" /> */}
             </section>
         </header>
     )
