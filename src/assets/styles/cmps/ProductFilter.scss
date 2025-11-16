@@ -3,11 +3,11 @@
   align-content: center;
   justify-items: center;
 
-  
+
   background-color: white;
   // margin-inline: 100px;
   //  width-max: 300px;
-   max-width: 500px;
+  max-width: 500px;
   padding: 10px;
 
 
@@ -20,4 +20,8 @@
     outline: none;
   }
 
+  .search {
+    height: 20px;
+    margin-top: 5px;
+  }
 }

@@ -16,13 +16,14 @@ export function ProductFilter({ filterBy, onFilterBy }) {
     }
 
     return <section className="product-filter">
+        <img className="search" src={`../../icons/search.png`} alt="search" />
         <input
             type="text"
             name="title"
             value={filterByToEdit.title || ""}
             placeholder="Search..."
             onChange={handleChange}
-            required
-        />
+            required />
+
     </section>
 }
