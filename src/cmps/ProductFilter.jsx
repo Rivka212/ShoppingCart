@@ -15,15 +15,17 @@ export function ProductFilter({ filterBy, onFilterBy }) {
         setFilterByToEdit(prev => ({ ...prev, [name]: value }));
     }
 
-    return <section className="product-filter">
-        <img className="search" src={`../../icons/search.png`} alt="search" />
-        <input
-            type="text"
-            name="title"
-            value={filterByToEdit.title || ""}
-            placeholder="Search..."
-            onChange={handleChange}
-            required />
+    return (
+        <section className="product-filter">
+            <img className="search" src={`../../icons/search.png`} alt="search" />
+            <input
+                type="text"
+                name="title"
+                value={filterByToEdit.title || ""}
+                placeholder="Search..."
+                onChange={handleChange}
+                required />
 
-    </section>
+        </section>
+    )
 }

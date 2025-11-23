@@ -9,7 +9,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 export function CartList() {
 
     const [filterBy, setFilterBy] = useState({ quantity: true })
-    const cartProducts = useSelector(storeState => storeState.productModule.cart)
+    const cartProducts = useSelector(storeState => storeState.productModule.cart) || []
 
 
     useEffect(() => {
